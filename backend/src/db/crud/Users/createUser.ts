@@ -1,5 +1,5 @@
-import { user } from "../models";
-import { createPasswordHash } from "../../auth/auth";
+import { user } from "models";
+import { createPasswordHash } from "auth";
 
 export async function createUser(username: string, password: string) {
   if (await user.findOne({ username })) {

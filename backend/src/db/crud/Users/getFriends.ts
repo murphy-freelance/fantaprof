@@ -1,4 +1,4 @@
-import { user } from "../models";
+import { user } from "models";
 
 export async function getFriends(userId: string) {
   return user

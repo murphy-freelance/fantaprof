@@ -1,4 +1,4 @@
-import { game, gameUser, user } from "../models";
+import { game, gameUser, user } from "models";
 
 export async function addUser(userId: string, gameId: string) {
   const Game: any = game.findOne({ _id: gameId }, "startingValue");

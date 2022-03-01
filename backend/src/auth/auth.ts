@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { createHash } from "crypto";
-import { user } from "../db/models/UserSchema";
+import { user } from "models";
 
 dotenv.config();
 

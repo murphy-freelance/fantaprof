@@ -35,5 +35,6 @@
   .navbar {
     display: flex;
     padding: 0.5rem 2rem;
+    height: 5vh;
   }
 </style>

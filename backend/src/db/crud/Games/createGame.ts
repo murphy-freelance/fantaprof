@@ -1,4 +1,4 @@
-import { game } from "../models";
+import { game } from "models";
 import { nanoid } from "nanoid";
 
 export async function createGame(

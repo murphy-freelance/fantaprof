@@ -6,6 +6,7 @@ const serverUrl = "http://127.0.0.1:5000";
 function createClient() {
   const { subscribe, set, update } = writable({
     user: { username: "", friends: [] },
+    requests: [],
   });
 
   return {
@@ -83,15 +84,15 @@ function createClient() {
 
       if (data.error) return data.errorMessage;
 
-      set({ user: data });
+      set(data);
 
       return data;
     },
-    async addFriend(username: string) {
+    async sendFriendRequest(username: string) {
       if (!Cookies.get("token"))
         return { error: "You must first login or register" };
 
-      await fetch(serverUrl + "/user/add-friend", {
+      await fetch(serverUrl + "/friend/send-request", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + Cookies.get("token"),
@@ -99,7 +100,27 @@ function createClient() {
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
-          friendUsername: username,
+          username,
+        }),
+      });
+      await client.getUser();
+    },
+    logout() {
+      Cookies.remove("token");
+    },
+    async setRequest(request: any, accept: boolean) {
+      if (!Cookies.get("token"))
+        return { error: "You must first login or register" };
+
+      await fetch(serverUrl + "/friend/request/" + request.requestId, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + Cookies.get("token"),
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          accept,
         }),
       });
       await client.getUser();

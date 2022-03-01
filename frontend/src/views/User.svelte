@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-
   import { client } from "../store";
-
   import Default from "../templates/Default.svelte";
+  import Button from "../components/Button.svelte";
+  import { push } from "svelte-spa-router";
 
   let friendUsername: string = "";
 
@@ -12,28 +12,68 @@
   });
 
   async function addFriend() {
-    await client.addFriend(friendUsername);
+    await client.sendFriendRequest(friendUsername);
+  }
+
+  function logout() {
+    client.logout();
+    push("/");
+  }
+
+  function acceptRequest(request: any) {
+    client.setRequest(request, true);
+  }
+
+  function refuseRequest(request: any) {
+    client.setRequest(request, false);
   }
 </script>
 
 <Default>
   <div class="container">
-    <h2>Hello {$client.user.username}</h2>
-    <h3>Your Friends:</h3>
-    <ul>
-      {#each $client.user.friends as friend}
-        <li>{friend.username}</li>
-      {/each}
-    </ul>
-    <h3>Send Friend Request</h3>
-    <form class="add--friend" on:submit|preventDefault={addFriend}>
-      <input
-        type="text"
-        class="form__input form__input--small"
-        bind:value={friendUsername}
-      />
-      <button class="btn">add</button>
-    </form>
+    <div class="top">
+      <h2>Hello {$client.user.username}</h2>
+      <h3>Your Friends:</h3>
+      <ul>
+        {#each $client.user.friends as friend}
+          <li>{friend.username}</li>
+        {/each}
+      </ul>
+      <h3>Send Friend Request</h3>
+      <form class="add--friend" on:submit|preventDefault={addFriend}>
+        <input
+          type="text"
+          class="form__input form__input--small"
+          bind:value={friendUsername}
+        />
+        <button class="btn">add</button>
+      </form>
+      <h3>Incoming</h3>
+      <ul>
+        {#each $client.requests as request}
+          <li>
+            <p>{request.sender.username}</p>
+            <div class="">
+              <button
+                class="icon-btn"
+                on:click={() => {
+                  acceptRequest(request);
+                }}><i class="fa-solid fa-circle-check" /></button
+              >
+              <button
+                class="icon-btn"
+                on:click={() => {
+                  refuseRequest(request);
+                }}><i class="fa-solid fa-circle-xmark" /></button
+              >
+            </div>
+          </li>
+        {/each}
+      </ul>
+    </div>
+    <div class="bottom">
+      <Button content="Logout" on:click={logout} />
+    </div>
   </div>
 </Default>
 
@@ -50,13 +90,26 @@
     font-family: SF Pro;
     font-style: normal;
     font-weight: normal;
+    font-size: 1.6rem;
+
     color: #fff;
     margin-top: 1rem;
     text-transform: capitalize;
   }
 
+  .icon-btn {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 1.4rem;
+  }
+
   .container {
     padding: 2rem;
+    display: flex;
+    height: 95vh;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   ul {
@@ -64,8 +117,16 @@
     font-family: SF Pro;
     font-style: normal;
     font-weight: normal;
+    font-size: 1.4rem;
     text-transform: capitalize;
-    list-style: none;
+    list-style: circle;
+
+    li {
+      margin: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   .add--friend {
