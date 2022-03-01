@@ -20,12 +20,16 @@
     push("/");
   }
 
-  function acceptRequest(request: any) {
-    client.setRequest(request, true);
+  async function acceptRequest(request: any) {
+    await client.setRequest(request, true);
   }
 
-  function refuseRequest(request: any) {
-    client.setRequest(request, false);
+  async function refuseRequest(request: any) {
+    await client.setRequest(request, false);
+  }
+
+  async function removeFriend(username: string) {
+    await client.removeFriend(username);
   }
 </script>
 
@@ -36,7 +40,15 @@
       <h3>Your Friends:</h3>
       <ul>
         {#each $client.user.friends as friend}
-          <li>{friend.username}</li>
+          <li>
+            {friend.username}
+            <button
+              class="icon-btn"
+              on:click={() => {
+                removeFriend(friend.username);
+              }}><i class="fa-solid fa-circle-xmark" /></button
+            >
+          </li>
         {/each}
       </ul>
       <h3>Send Friend Request</h3>

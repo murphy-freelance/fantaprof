@@ -125,6 +125,23 @@ function createClient() {
       });
       await client.getUser();
     },
+    async removeFriend(username: string) {
+      if (!Cookies.get("token"))
+        return { error: "You must first login or register" };
+
+      await fetch(serverUrl + "/friend/remove", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + Cookies.get("token"),
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          username,
+        }),
+      });
+      await client.getUser();
+    },
   };
 }
 

@@ -6,6 +6,7 @@ export * from "./crud/Games/createGame";
 export * from "./crud/Requests/addFriend";
 export * from "./crud/Requests/createRequest";
 export * from "./crud/Requests/getRequests";
+export * from "./crud/Requests/removeFriend";
 export * from "./crud/Requests/updateRequest";
 export * from "./crud/Users/createUser";
 export * from "./crud/Users/getFriends";
