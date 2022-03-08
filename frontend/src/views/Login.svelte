@@ -25,8 +25,8 @@
     <input
       type="text"
       bind:value={username}
-      class="form__input"
       placeholder="username"
+      class="form__input"
     />
     <input
       type="text"

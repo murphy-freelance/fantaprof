@@ -1,5 +1,5 @@
 import { user } from "models";
-import { getRequests } from "crud";
+import { getRequests, getGames } from "crud";
 
 export async function getUser(userId: string) {
   const User = await user
@@ -7,6 +7,7 @@ export async function getUser(userId: string) {
     .populate("friends", { _id: 0, username: 1 });
 
   const Request = await getRequests(userId);
+  const Games = await getGames(userId);
 
-  return { user: User, requests: Request };
+  return { user: User, requests: Request, games: Games };
 }

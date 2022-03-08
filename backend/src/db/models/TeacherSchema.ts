@@ -1,8 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema } from "mongoose";
+
+export interface Teacher {
+  name: string;
+  value: number;
+}
 
 export const TeacherSchema = new Schema({
   name: String,
   value: Number,
 });
-
-export const teacher = model("Teacher", TeacherSchema);

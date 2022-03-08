@@ -3,6 +3,8 @@ export * from "./crud/Actions/addActions";
 export * from "./crud/Games/addTeacher";
 export * from "./crud/Games/addUser";
 export * from "./crud/Games/createGame";
+export * from "./crud/Games/getGame";
+export * from "./crud/Games/getGames";
 export * from "./crud/Requests/addFriend";
 export * from "./crud/Requests/createRequest";
 export * from "./crud/Requests/getRequests";

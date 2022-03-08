@@ -11,7 +11,7 @@ const GameSchema = new Schema({
   teachers: [TeacherSchema],
   startingValue: Number,
   users: [GameUserSchema],
-  adminUserId: String,
+  adminUserId: { type: Schema.Types.ObjectId, required: true },
 });
 
 export const game = model("Game", GameSchema);

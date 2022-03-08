@@ -13,6 +13,7 @@
 
   async function addFriend() {
     await client.sendFriendRequest(friendUsername);
+    friendUsername = "";
   }
 
   function logout() {
@@ -38,6 +39,7 @@
     <div class="top">
       <h2>Hello {$client.user.username}</h2>
       <h3>Your Friends:</h3>
+      <hr />
       <ul>
         {#each $client.user.friends as friend}
           <li>
@@ -51,16 +53,8 @@
           </li>
         {/each}
       </ul>
-      <h3>Send Friend Request</h3>
-      <form class="add--friend" on:submit|preventDefault={addFriend}>
-        <input
-          type="text"
-          class="form__input form__input--small"
-          bind:value={friendUsername}
-        />
-        <button class="btn">add</button>
-      </form>
       <h3>Incoming</h3>
+      <hr />
       <ul>
         {#each $client.requests as request}
           <li>
@@ -84,12 +78,30 @@
       </ul>
     </div>
     <div class="bottom">
+      <div class="add-friend-container">
+        <h3>Send Friend Request</h3>
+        <form class="add--friend" on:submit|preventDefault={addFriend}>
+          <input
+            type="text"
+            class="form__input form__input--small"
+            bind:value={friendUsername}
+          />
+          <button class="btn">add</button>
+        </form>
+      </div>
       <Button content="Logout" on:click={logout} />
     </div>
   </div>
 </Default>
 
 <style lang="scss" scoped>
+  .add-friend-container {
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    border-top: 1px solid #fff;
+  }
   h2 {
     font-family: SF Pro;
     font-style: normal;
@@ -117,9 +129,8 @@
   }
 
   .container {
-    padding: 2rem;
     display: flex;
-    height: 95vh;
+    height: 90vh;
     flex-direction: column;
     justify-content: space-between;
   }

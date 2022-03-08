@@ -11,6 +11,7 @@ body {
 html {
   font-family: SF Pro;
   font-style: normal;
+  overflow: hidden;
 }
 
 .form__input {
@@ -21,9 +22,21 @@ html {
   border: none;
   width: 100%;
   margin-bottom: 1rem;
+  font-family: SF Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: capitalize;
 
   &--small {
     padding: 0.3rem;
+    width: 65%;
+    margin: 0;
+  }
+
+  &--interface {
+    padding: 0.2rem;
     width: 65%;
     margin: 0;
   }
@@ -44,4 +57,15 @@ html {
 
 .mt-05 {
   margin-top: 0.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+a {
+  &:link,
+  &:after {
+    text-decoration: none;
+  }
 }

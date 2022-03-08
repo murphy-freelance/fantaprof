@@ -1,9 +1,13 @@
 import { Schema, model } from "mongoose";
 
+export interface GameUser {
+  user: string;
+  points: number;
+  credits: number;
+}
+
 export const GameUserSchema = new Schema({
-  userId: { type: Schema.Types.ObjectId, ref: "User" },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   points: Number,
   credits: Number,
 });
-
-export const gameUser = model("GameUser", GameUserSchema);

@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { link } from "svelte-spa-router";
+
   export let size: number = 3;
 </script>
 
-<h1 style="--size:{size + 'rem'}">Fantaprof</h1>
+<a href="/" use:link>
+  <h1 style="--size:{size + 'rem'}">Fantaprof</h1>
+</a>
 
-<style>
+<style lang="scss">
   h1 {
     font-family: SF Pro;
     font-style: normal;

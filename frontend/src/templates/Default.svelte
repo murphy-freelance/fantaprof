@@ -8,7 +8,9 @@
     <a href="/user" use:link>
       <ProfileImage />
     </a>
-    <h1 class="heading">Fantaprof</h1>
+    <a href="/home" use:link>
+      <h1 class="heading">Fantaprof</h1>
+    </a>
   </div>
   <div class="content">
     <slot />
@@ -36,5 +38,9 @@
     display: flex;
     padding: 0.5rem 2rem;
     height: 5vh;
+  }
+
+  .content {
+    padding: 2rem 2rem 0 2rem;
   }
 </style>
