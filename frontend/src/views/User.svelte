@@ -141,7 +141,6 @@
     font-style: normal;
     font-weight: normal;
     font-size: 1.4rem;
-    text-transform: capitalize;
     list-style: circle;
 
     li {
@@ -171,7 +170,6 @@
     font-style: normal;
     font-weight: normal;
     text-align: center;
-    text-transform: capitalize;
 
     color: #000000;
   }

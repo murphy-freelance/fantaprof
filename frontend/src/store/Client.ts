@@ -7,19 +7,13 @@ function createClient() {
     user: { username: "", friends: [] },
     requests: [],
   });
-
   return {
     subscribe,
     async login(
       username: string,
       password: string
     ): Promise<{ error: boolean }> {
-      console.log(
-        JSON.stringify({
-          username: username,
-          password: password,
-        })
-      );
+      console.log("gino " + serverUrl);
       const query = await fetch(serverUrl + "/user/login", {
         method: "POST",
         headers: {
